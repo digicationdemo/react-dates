@@ -90,6 +90,11 @@ describe('DayPicker', () => {
           sinon.stub(DayPicker.prototype, 'updateStateAfterMonthTransition');
         });
 
+        afterEach(() => {
+          DayPicker.prototype.adjustDayPickerHeight.restore();
+          DayPicker.prototype.updateStateAfterMonthTransition.restore();
+        });
+
         it('is true if state.monthTransition is truthy', () => {
           const wrapper = shallow(<DayPicker />);
           wrapper.setState({ monthTransition: 'foo' });
@@ -140,6 +145,12 @@ describe('DayPicker', () => {
       sinon.stub(DayPicker.prototype, 'updateStateAfterMonthTransition');
     });
 
+    afterEach(() => {
+      DayPicker.prototype.translateFirstDayPickerForAnimation.restore();
+      DayPicker.prototype.adjustDayPickerHeight.restore();
+      DayPicker.prototype.updateStateAfterMonthTransition.restore();
+    });
+
     describe('interactions', () => {
       let handlePrevMonthClickSpy;
       beforeEach(() => {
@@ -179,10 +190,19 @@ describe('DayPicker', () => {
       sinon.stub(DayPicker.prototype, 'updateStateAfterMonthTransition');
     });
 
+    afterEach(() => {
+      DayPicker.prototype.adjustDayPickerHeight.restore();
+      DayPicker.prototype.updateStateAfterMonthTransition.restore();
+    });
+
     describe('interactions', () => {
       let handleNextMonthClickSpy;
       beforeEach(() => {
         handleNextMonthClickSpy = sinon.spy(DayPicker.prototype, 'handleNextMonthClick');
+      });
+
+      afterEach(() => {
+        DayPicker.prototype.handleNextMonthClick.restore();
       });
 
       it('is triggered by prev month button click', () => {
@@ -212,6 +232,11 @@ describe('DayPicker', () => {
     beforeEach(() => {
       adjustDayPickerHeightSpy = sinon.stub(DayPicker.prototype, 'adjustDayPickerHeight');
       initializeDayPickerWidthSpy = sinon.stub(DayPicker.prototype, 'initializeDayPickerWidth');
+    });
+
+    afterEach(() => {
+      DayPicker.prototype.adjustDayPickerHeight.restore();
+      DayPicker.prototype.initializeDayPickerWidth.restore();
     });
 
     describe('#componentDidMount', () => {

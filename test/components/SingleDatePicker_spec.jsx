@@ -406,12 +406,14 @@ describe('SingleDatePicker', () => {
       sinon.stub(SingleDatePicker.prototype, 'isPastDate').returns(false);
       const wrapper = shallow(<SingleDatePicker id="date" isDayBlocked={isDayBlockedStub} />);
       expect(wrapper.instance().isBlocked()).to.equal(true);
+      SingleDatePicker.prototype.isPastDate.restore();
     });
 
     it('returns true if isPastDate returns true', () => {
       sinon.stub(SingleDatePicker.prototype, 'isPastDate').returns(true);
       const wrapper = shallow(<SingleDatePicker id="date" />);
       expect(wrapper.instance().isBlocked()).to.equal(true);
+      SingleDatePicker.prototype.isPastDate.restore();
     });
 
     it('returns false if props.isDayBlocked and isPastDate are both false', () => {
@@ -419,6 +421,7 @@ describe('SingleDatePicker', () => {
       sinon.stub(SingleDatePicker.prototype, 'isPastDate').returns(false);
       const wrapper = shallow(<SingleDatePicker id="date" isDayBlocked={isDayBlockedStub} />);
       expect(wrapper.instance().isBlocked()).to.equal(false);
+      SingleDatePicker.prototype.isPastDate.restore();
     });
   });
 
